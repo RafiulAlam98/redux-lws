@@ -17,27 +17,30 @@ const counterReducer = (state = initialState, action) => {
       ...state,
       value: state.value - 1,
     };
+  } else {
+    return { ...state };
   }
 };
+const store = Redux.createStore(counterReducer);
 
 const render = () => {
   const state = store.getState();
   counterEl.innerText = state.value.toString();
 };
 
-const store = createStore(counterReducer);
+render();
 
 store.subscribe(render);
 
 incrementEl.addEventListener("click", () => {
   console.log("click");
-  // store.dispatch({
-  //   type: "increment",
-  // });
+  store.dispatch({
+    type: "increment",
+  });
 });
 decrementEl.addEventListener("click", () => {
   console.log("click");
-  // store.dispatch({
-  //   type: "decrement",
-  // });
+  store.dispatch({
+    type: "decrement",
+  });
 });
